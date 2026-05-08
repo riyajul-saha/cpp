@@ -1,5 +1,4 @@
 #include<iostream>
-// #include<math>
 using namespace std;
 
 int length(int num)
@@ -23,13 +22,18 @@ int calculate_exponant(int num,int power)
   return result;
 }
 
-bool is_automorphic(int num)
+bool is_armstrong(int num)
 {
-  int sqare = calculate_exponant(num,2);
-  int len = length(num);
-  int devisor = calculate_exponant(10,len);
-  int result = (sqare - num)%devisor;
-  if(result == 0)
+  int temp = num;
+  int sum = 0;
+  int power = length(num);
+  while(temp > 0)
+  {
+    int rem = temp%10;
+    sum = sum+calculate_exponant(rem,power);
+    temp = temp/10;
+  }
+  if(sum == num)
   {
     return true;
   }
@@ -39,20 +43,17 @@ bool is_automorphic(int num)
   }
 }
 
-
 int main()
 {
   int number;
-  int len;
-  cout<<"Enter a Number :";
+  cout<<"Enter a number :";
   cin>>number;
-  if(is_automorphic(number))
+  if(is_armstrong(number))
   {
-    cout<<number<<" is a automophoric number"<<endl;
+    cout<<number<<" is a armstrong number"<<endl;
   }
   else
   {
-    cout<<number<<" is ~not a automophoric number"<<endl;
+    cout<<number<<" is ~not a armstrong number"<<endl;
   }
-  return 0;
 }
